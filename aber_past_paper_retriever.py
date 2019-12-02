@@ -46,13 +46,17 @@ def get_module_details():
     if module_code is '':
         raise RuntimeError("No Module Code Given")
         
-    year_from = int(input("Enter Starting Year to Retrieve for: "))
-    if year_from is None: year_from = DEFAULT_YEAR_FROM
+    try:
+        year_from = int(input("Enter Starting Year to Retrieve for: "))
+    except ValueError:
+        year_from = DEFAULT_YEAR_FROM
     
-    year_to = int(input("Enter End Year to Retrieve for: "))
-    if year_to is None: year_to = datetime.datetime.now().year
+    try:
+        year_to = int(input("Enter End Year to Retrieve for: "))
+    except ValueError:
+        year_to = datetime.datetime.now().year
     
-    print()
+    print() # print blank line
     return (department, module_code, year_from, year_to)
 
 
