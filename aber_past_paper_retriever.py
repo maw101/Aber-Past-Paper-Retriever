@@ -1,7 +1,10 @@
-import os, requests, getpass, datetime
+import datetime, os, requests, getpass
 
-DEPARTMENT = 'compsci'
+# define constants
 DEFAULT_YEAR_FROM = 2015
+
+
+
 
 def format_pdf_url(year, semester, module_code, department):
     return f'https://www.aber.ac.uk/en/media/departmental/examinations/pastpapers/pdf/{department}/sem{semester}-{year % 100}/{module_code}-{year % 100}.pdf'
@@ -15,8 +18,8 @@ def format_local_pdf_path(year, semester, module_code):
 
 def print_formatted_retrieval_result(year, semester, module_code, result):
     print(module_code, year, "Semester", semester, result)
-
-
+    
+    
 def file_exists(url):
     r = requests.head(url, auth=auth_header) # get header of file at url
     return r.headers['Content-Length'] != '' # file exists
@@ -32,6 +35,25 @@ def get_auth_header():
         print('ERROR', error)
         
     return requests.auth.HTTPBasicAuth(USERNAME, PASSWORD)
+
+
+def get_module_details():
+    department = input("Enter your Department URL from the past papers URL (see README file, leave blank for compsci): ")
+    if department is None:
+        department = "compsci"
+        
+    module_code = input("Enter Module Code: ")
+    if module_code is '':
+        raise RuntimeError("No Module Code Given")
+        
+    year_from = int(input("Enter Starting Year to Retrieve for: "))
+    if year_from is None: year_from = DEFAULT_YEAR_FROM
+    
+    year_to = int(input("Enter End Year to Retrieve for: "))
+    if year_to is None: year_to = datetime.datetime.now().year
+    
+    print()
+    return (department, module_code, year_from, year_to)
 
 
 def get_paper(year, semester, module_code, auth_header, department):
@@ -60,28 +82,13 @@ def get_paper(year, semester, module_code, auth_header, department):
 
 
 if __name__ == '__main__':
-    import argparse
+    #import argparse
 
     auth_header = get_auth_header()
+    DEPARTMENT_URL_FOLDER, MODULE_CODE, YEAR_FROM, YEAR_TO = get_module_details()
 
     # get current working directory (CWD) according to OS
     cwd = os.getcwd()
-
-    # initialise a parser to see if the CWD was passed in as an argument when script called
-    parser = argparse.ArgumentParser(description="Get Module Code and Years from and Until")
-    parser.add_argument('mod_code', type=str, nargs='?', help='module code to retrieve for')
-    parser.add_argument('year_from', type=int, nargs='?', help='year to start retrieval from')
-    parser.add_argument('year_to', type=int, nargs='?', help='year to stop retrieval')
-
-    args = parser.parse_args()
-
-    # check parsed arguments 
-    if args.mod_code is not None:
-        MODULE_CODE = args.mod_code
-    else:
-        raise RuntimeError("No Module Code Given")
-    YEAR_FROM = args.year_from if args.year_from is not None else DEFAULT_YEAR_FROM
-    YEAR_TO = args.year_to if args.year_to is not None else datetime.datetime.now().year
 
     # move in to the new directory
     os.chdir(cwd)
@@ -96,6 +103,8 @@ if __name__ == '__main__':
     print("Retrieving Papers for", MODULE_CODE)
     for year in range(YEAR_FROM, YEAR_TO + 1):
         for semester in [1, 2]:
-            get_paper(year, semester, MODULE_CODE, auth_header, DEPARTMENT)
+            get_paper(year, semester, MODULE_CODE, auth_header, DEPARTMENT_URL_FOLDER)
 
     print("\nAll Papers in Range Retrieved")
+    
+    
