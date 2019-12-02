@@ -1,6 +1,8 @@
 # Aber Uni Past Paper Retriever
 Fetches all Past Paper PDFs for a given module within a given year range.
 
+Past Papers are stored at [aber.ac.uk/en/past-papers/](https://www.aber.ac.uk/en/past-papers/).
+
 ## Requirements
 * Python 3
 * [Python 3 Requests](https://pypi.org/project/requests/)
