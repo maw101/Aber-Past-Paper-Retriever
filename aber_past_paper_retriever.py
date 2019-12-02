@@ -20,7 +20,7 @@ def print_formatted_retrieval_result(year, semester, module_code, result):
     print(module_code, year, "Semester", semester, result)
     
     
-def file_exists(url):
+def file_exists(url, auth_header):
     r = requests.head(url, auth=auth_header) # get header of file at url
     return r.headers['Content-Length'] != '' # file exists
 
@@ -58,7 +58,7 @@ def get_module_details():
 
 def get_paper(year, semester, module_code, auth_header, department):
     url = format_pdf_url(year, semester, module_code, department)
-    if file_exists(url):
+    if file_exists(url, auth_header):
         try:
             r = requests.get(url, auth=auth_header)
             # raise exception if response not successful
