@@ -9,8 +9,15 @@ def format_local_pdf_path(year, semester, module_code):
     output_file_path = os.path.join(module_code, output_file_name)
     return output_file_path;
 
+
 def print_formatted_retrieval_result(year, semester, module_code, result):
     print(module_code, year, "Semester", semester, result)
+
+
+def file_exists(url):
+    r = requests.head(url, auth=auth_header) # get header of file at url
+    return r.headers['Content-Length'] != '' # file exists
+
 
 def get_auth_header():
     # get username and password for authentication
