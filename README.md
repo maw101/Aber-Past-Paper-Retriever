@@ -6,7 +6,11 @@ Fetches all Past Paper PDFs for a given module within a given year range.
 * [Python 3 Requests](https://pypi.org/project/requests/)
 
 ## Usage
-Once the requirements are satisfied in a terminal window run:
+Once the requirements are satisfied:
+
+Clone or download the project to your machine.
+
+Then in a terminal window run:
 
 ```
 python3 aber_past_paper_retriever.py
@@ -23,6 +27,31 @@ python3 aber_past_paper_retriever.py
 6) Enter the Last Year you wish to try and retrieve papers for
 
 Papers will then be retrieved and stored within a new folder in the location where the script is being run from.
+
+## Example Output
+```
+username@computername:~/Documents/ppr$ python3 aber_past_paper_retriever.py 
+Enter Aberystwyth Username: 
+Enter Aberystwyth Password: 
+Enter your Department URL from the past papers URL (see README file, leave blank for compsci): 
+Enter Module Code: CS15020
+Enter Starting Year to Retrieve for: 2016
+Enter End Year to Retrieve for: 2019
+
+Retrieving Papers for CS15020
+CS15020 2016 Semester 1 Retrieved
+CS15020 2016 Semester 2 Not Found
+CS15020 2017 Semester 1 Not Found
+CS15020 2017 Semester 2 Retrieved
+CS15020 2018 Semester 1 Not Found
+CS15020 2018 Semester 2 Retrieved
+CS15020 2019 Semester 1 Not Found
+CS15020 2019 Semester 2 Not Found
+
+All Papers in Range Retrieved
+
+```
+
 
 ## Errors
 * If you encounter a 401 Unauthorized Error your Aber Credentials (username/password) are either incorrect or you do not have the necessary permissions to view the document.
