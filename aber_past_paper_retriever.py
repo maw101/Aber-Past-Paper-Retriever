@@ -82,9 +82,7 @@ def get_paper(year, semester, module_code, auth_header, department):
 
 
 if __name__ == '__main__':
-    #import argparse
-
-    auth_header = get_auth_header()
+    AUTH_HEADER = get_auth_header()
     DEPARTMENT_URL_FOLDER, MODULE_CODE, YEAR_FROM, YEAR_TO = get_module_details()
 
     # get current working directory (CWD) according to OS
@@ -103,7 +101,7 @@ if __name__ == '__main__':
     print("Retrieving Papers for", MODULE_CODE)
     for year in range(YEAR_FROM, YEAR_TO + 1):
         for semester in [1, 2]:
-            get_paper(year, semester, MODULE_CODE, auth_header, DEPARTMENT_URL_FOLDER)
+            get_paper(year, semester, MODULE_CODE, AUTH_HEADER, DEPARTMENT_URL_FOLDER)
 
     print("\nAll Papers in Range Retrieved")
     
