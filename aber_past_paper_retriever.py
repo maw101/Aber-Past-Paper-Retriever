@@ -29,3 +29,28 @@ def get_auth_header():
         print('ERROR', error)
         
     return requests.auth.HTTPBasicAuth(USERNAME, PASSWORD)
+
+
+def get_paper(year, semester, module_code, auth_header):
+    url = format_pdf_url(year, semester, module_code)
+    if file_exists(url):
+        try:
+            r = requests.get(url, auth=auth_header)
+            # raise exception if response not successful
+            r.raise_for_status()
+        except requests.exceptions.HTTPError as http_err:
+            print("HTTP Error Occurred:", http_err)
+        else:
+            # send a HTTP request to the server and save
+            # the HTTP response in a response object called r
+            local_pdf_path = format_local_pdf_path(year, semester, module_code)
+        
+            with open(local_pdf_path, 'wb') as f:
+                # Saving received content as a png file in 
+                # binary format 
+                # write the contents of the response (r.content) 
+                # to a new file in binary mode. 
+                f.write(r.content)
+            print_formatted_retrieval_result(year, semester, module_code, "Retrieved")
+    else:
+        print_formatted_retrieval_result(year, semester, module_code, "Not Found")
