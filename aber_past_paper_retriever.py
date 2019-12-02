@@ -39,7 +39,7 @@ def get_auth_header():
 
 def get_module_details():
     department = input("Enter your Department URL from the past papers URL (see README file, leave blank for compsci): ")
-    if department is None:
+    if department is '':
         department = "compsci"
         
     module_code = input("Enter Module Code: ")
