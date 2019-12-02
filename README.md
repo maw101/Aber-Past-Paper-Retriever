@@ -4,8 +4,8 @@ Fetches all Past Paper PDFs for a given module within a given year range.
 Past Papers are stored at [aber.ac.uk/en/past-papers/](https://www.aber.ac.uk/en/past-papers/).
 
 ## Requirements
-* Python 3
-* [Python 3 Requests](https://pypi.org/project/requests/)
+* [Python 3](https://www.python.org/downloads/) (utilises os, datetime, getpass libraries)
+* [Python 3 Requests](https://pypi.org/project/requests/) Library
 
 ## Usage
 Once the requirements are satisfied:
