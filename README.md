@@ -24,6 +24,7 @@ python3 aber_past_paper_retriever.py
     1) https://www.aber.ac.uk/en/media/departmental/examinations/pastpapers/pdf/compsci/sem1-18/CS23820-18.pdf - in this case we enter 'compsci'.
     2) https://www.aber.ac.uk/en/media/departmental/examinations/pastpapers/pdf/history/sem2-19/HQ33220-19.pdf - in this case we enter 'history'.
     3) https://www.aber.ac.uk/en/media/departmental/examinations/pastpapers/pdf/imaps/physics/sem1-17/PH01010-17.pdf  - in this case we enter 'imaps/physics'.
+    4) https://www.aber.ac.uk/en/media/departmental/examinations/pastpapers/pdf/smba/ugrad/sem1-18/AC10510-18.pdf - in this case we enter 'smba/ugrad'.
 4) Enter the full Module Code including the number of credits it is worth - eg PH01010, CS23820, or HQ33220
 5) Enter the First Year to try and retrieve papers for
 6) Enter the Last Year you wish to try and retrieve papers for
