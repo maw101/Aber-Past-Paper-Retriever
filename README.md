@@ -8,6 +8,7 @@ Past Papers are stored at [aber.ac.uk/en/past-papers/](https://www.aber.ac.uk/en
 * [Python 3 Requests](https://pypi.org/project/requests/) Library
 
 ## Usage
+### aber_past_paper_retriever.py
 Once the requirements are satisfied:
 
 Clone or download the project to your machine.
@@ -30,6 +31,17 @@ python3 aber_past_paper_retriever.py
 6) Enter the Last Year you wish to try and retrieve papers for
 
 Papers will then be retrieved and stored within a new folder in the location where the script is being run from.
+
+### find_departments_url_identifier.py
+Identifies value to be used in step 3 above. 
+
+In a terminal window run:
+
+```
+python3 find_departments_url_identifier.py
+```
+
+Then enter a full URL for a past paper such as those given in the examples in step 3.
 
 ## Example Output
 ```
