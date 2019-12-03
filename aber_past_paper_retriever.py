@@ -86,26 +86,31 @@ def get_paper(year, semester, module_code, department, auth_header):
 
 if __name__ == '__main__':
     AUTH_HEADER = get_auth_header()
-    DEPARTMENT_URL_FOLDER, MODULE_CODE, YEAR_FROM, YEAR_TO = get_module_details()
+    while True:
+        DEPARTMENT_URL_FOLDER, MODULE_CODE, YEAR_FROM, YEAR_TO = get_module_details()
 
-    # get current working directory (CWD) according to OS
-    cwd = os.getcwd()
+        # get current working directory (CWD) according to OS
+        cwd = os.getcwd()
 
-    # move in to the new directory
-    os.chdir(cwd)
+        # move in to the new directory
+        os.chdir(cwd)
 
-    # check if the folder where we are going to write exists
-    try:
-        os.mkdir(MODULE_CODE)
-    except:
-        pass
-    
-    # get papers in our range range
-    print("Retrieving Papers for", MODULE_CODE)
-    for year in range(YEAR_FROM, YEAR_TO + 1):
-        for semester in [1, 2]:
-            get_paper(year, semester, MODULE_CODE, DEPARTMENT_URL_FOLDER, AUTH_HEADER)
+        # check if the folder where we are going to write exists
+        try:
+            os.mkdir(MODULE_CODE)
+        except:
+            pass
+        
+        # get papers in our range range
+        print("Retrieving Papers for", MODULE_CODE)
+        for year in range(YEAR_FROM, YEAR_TO + 1):
+            for semester in [1, 2]:
+                get_paper(year, semester, MODULE_CODE, DEPARTMENT_URL_FOLDER, AUTH_HEADER)
 
-    print("\nAll Papers in Range Retrieved")
-    
+        print("\nAll Papers in Range Retrieved")
+
+        print() # print blank line
+        exit_value = input("Press Enter to EXIT the program, any other input will allow you to enter another module!\n")
+        if exit_value is '':
+            break
     
