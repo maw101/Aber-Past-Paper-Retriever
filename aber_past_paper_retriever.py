@@ -7,7 +7,8 @@ DEFAULT_YEAR_FROM = 2015
 
 
 def format_pdf_url(year, semester, module_code, department):
-    return f'https://www.aber.ac.uk/en/media/departmental/examinations/pastpapers/pdf/{department}/sem{semester}-{year % 100}/{module_code}-{year % 100}.pdf'
+    year_two_digit_format = year % 100
+    return f'https://www.aber.ac.uk/en/media/departmental/examinations/pastpapers/pdf/{department}/sem{semester}-{year_two_digit_format}/{module_code}-{year_two_digit_format}.pdf'
 
 
 def format_local_pdf_path(year, semester, module_code):
