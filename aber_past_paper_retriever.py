@@ -61,7 +61,7 @@ def get_module_details():
     return (department, module_code, year_from, year_to)
 
 
-def get_paper(year, semester, module_code, auth_header, department):
+def get_paper(year, semester, module_code, department, auth_header):
     url = format_pdf_url(year, semester, module_code, department)
     if file_exists(url, auth_header):
         try:
@@ -74,7 +74,7 @@ def get_paper(year, semester, module_code, auth_header, department):
             print("HTTP Error Occurred:", http_err)
         else:
             local_pdf_path = format_local_pdf_path(year, semester, module_code)
-            
+
             with open(local_pdf_path, 'wb') as f:
                 # Saving received content as a PDF file in binary format 
                 # write the contents of the response (r.content) to a new file in binary mode. 
@@ -104,7 +104,7 @@ if __name__ == '__main__':
     print("Retrieving Papers for", MODULE_CODE)
     for year in range(YEAR_FROM, YEAR_TO + 1):
         for semester in [1, 2]:
-            get_paper(year, semester, MODULE_CODE, AUTH_HEADER, DEPARTMENT_URL_FOLDER)
+            get_paper(year, semester, MODULE_CODE, DEPARTMENT_URL_FOLDER, AUTH_HEADER)
 
     print("\nAll Papers in Range Retrieved")
     
