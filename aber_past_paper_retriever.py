@@ -76,10 +76,8 @@ def get_paper(year, semester, module_code, auth_header, department):
             local_pdf_path = format_local_pdf_path(year, semester, module_code)
         
             with open(local_pdf_path, 'wb') as f:
-                # Saving received content as a png file in 
-                # binary format 
-                # write the contents of the response (r.content) 
-                # to a new file in binary mode. 
+                # Saving received content as a PDF file in binary format 
+                # write the contents of the response (r.content) to a new file in binary mode. 
                 f.write(r.content)
             print_formatted_retrieval_result(year, semester, module_code, "Retrieved")
     else:
