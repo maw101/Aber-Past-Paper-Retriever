@@ -1,5 +1,5 @@
 # Aber Uni Past Paper Retriever
-Fetches all Past Paper PDFs for a given module within a given year range.
+Fetches all Past Paper PDFs for a given module within a given year range - upto and including 2018.
 
 Past Papers are stored at [aber.ac.uk/en/past-papers/](https://www.aber.ac.uk/en/past-papers/).
 
