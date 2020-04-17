@@ -32,19 +32,7 @@ python3 aber_past_paper_retriever.py
 
 Papers will then be retrieved and stored within a new folder in the location where the script is being run from.
 
-### find_departments_url_identifier.py
-Identifies value to be used in step 3 above. 
-
-In a terminal window run:
-
-```
-python3 find_departments_url_identifier.py
-```
-
-Then enter a full URL for a past paper such as those given in the examples in step 3.
-
-## Example Output
-### aber_past_paper_retriever.py
+#### Example Output
 ```
 username@computername:~/Documents/ppr$ python3 aber_past_paper_retriever.py 
 Enter Aberystwyth Username: 
@@ -67,7 +55,19 @@ CS15020 2019 Semester 2 Not Found
 All Papers in Range Retrieved
 ```
 
+
 ### find_departments_url_identifier.py
+Identifies value to be used in step 3 above. 
+
+In a terminal window run:
+
+```
+python3 find_departments_url_identifier.py
+```
+
+Then enter a full URL for a past paper such as those given in the examples in step 3.
+
+#### Example Output
 ```
 username@computername:~/Documents/ppr$ python3 find_departments_url_identifier.py 
 Enter the full URL for a single past paper: https://www.aber.ac.uk/en/media/departmental/examinations/pastpapers/pdf/smba/ugrad/sem1-18/AC10510-18.pdf
