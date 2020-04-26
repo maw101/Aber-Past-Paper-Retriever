@@ -1,4 +1,6 @@
-import os, requests, getpass
+import os
+import requests
+import getpass
 import lxml.html
 
 # define constants
