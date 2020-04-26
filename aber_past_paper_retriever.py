@@ -83,6 +83,18 @@ def get_semester_page_links(department_url):
     
     return semester_links
 
+
+def get_paper_links_for_semester(semester_url):
+    semester_page_response = requests.get(semester_url, stream=True)
+    semester_page_response.raw.decode_content = True
+    page_tree = lxml.html.parse(semester_page_response.raw)
+    
+    paper_links = page_tree.xpath('/html/body/div[2]/main/div/article/div//a/@href')
+    paper_links = [WEBSITE_BASE_URL + paper_url for paper_url in paper_links]
+    
+    return paper_links
+
+
 if __name__ == '__main__':
     AUTH_HEADER = get_auth_header()
     while True:
