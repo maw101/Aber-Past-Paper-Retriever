@@ -114,7 +114,11 @@ if __name__ == '__main__':
         # get papers in our range
         print("Retrieving Papers for", MODULE_CODE)
         
-        # TODO HERE
+        SEMESTER_PAGE_LINKS = get_semester_page_links(DEPARTMENT_URL)
+        
+        for semester in SEMESTER_PAGE_LINKS:
+            CURRENT_SEMESTER_PAPER_LINKS = get_paper_links_for_semester(semester)
+            get_module_paper_for_semester(CURRENT_SEMESTER_PAPER_LINKS, MODULE_CODE, AUTH_HEADER)
 
         print("\nAll Semesters Checked. Check folder for any downloaded papers.")
 
