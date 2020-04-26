@@ -95,6 +95,13 @@ def get_paper_links_for_semester(semester_url):
     return paper_links
 
 
+def find_module_paper_url(paper_urls, module_code):
+    for url in paper_urls:
+        if module_code in url:
+            return url
+    return None
+
+
 if __name__ == '__main__':
     AUTH_HEADER = get_auth_header()
     while True:
