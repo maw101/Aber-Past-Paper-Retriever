@@ -67,8 +67,8 @@ def get_module_details():
 		tuple (str, str): department url and module code in a tuple
 
 	"""
-    department_url = input("Enter your Department URL from the past papers \
-                           URL (see README file, leave blank for compsci): ")
+    department_url = input("Enter your Department URL from the past papers" +
+                           " URL (see README file, leave blank for compsci): ")
     if department_url == '':
         department_url = 'https://www.aber.ac.uk/en/past-papers/compsci/'
 
@@ -209,8 +209,8 @@ if __name__ == '__main__':
         print("\nAll Semesters Checked. Check folder for any downloaded papers.")
 
         print() # print blank line
-        EXIT_VALUE = input("Press Enter to EXIT the program, any other input \
-                           will allow you to enter another module!\n")
+        EXIT_VALUE = input("Press Enter to EXIT the program, any other input" +
+                           " will allow you to enter another module!\n")
         if EXIT_VALUE == '':
             break
 
