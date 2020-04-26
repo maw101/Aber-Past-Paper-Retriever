@@ -4,22 +4,8 @@ import lxml.html
 # define constants
 DEFAULT_YEAR_FROM = 2015
 WEBSITE_BASE_URL = 'https://www.aber.ac.uk'
-
-def format_pdf_url(year, semester, module_code, department):
-    year_two_digit_format = year % 100
-    return f'https://www.aber.ac.uk/en/media/departmental/examinations/pastpapers/pdf/{department}/sem{semester}-{year_two_digit_format}/{module_code}-{year_two_digit_format}.pdf'
-
-
-def format_local_pdf_path(year, semester, module_code):
-    output_file_name = f'{module_code}-{year}-{semester}.pdf'
-    output_file_path = os.path.join(module_code, output_file_name)
-    return output_file_path;
-
-
-def print_formatted_retrieval_result(year, semester, module_code, result):
-    print(module_code, year, "Semester", semester, result)
     
-    
+
 def file_exists(url, auth_header):
     r = requests.head(url, auth=auth_header) # get header of file at url
     return r.headers['Content-Length'] != '' # file exists
