@@ -7,20 +7,21 @@ import lxml.html
 WEBSITE_BASE_URL = 'https://www.aber.ac.uk'
 
 def file_exists(url, auth_header):
-    r = requests.head(url, auth=auth_header) # get header of file at url
-    return r.headers['Content-Length'] != '' # file exists
+    # get header of file at url
+    url_request_response = requests.head(url, auth=auth_header)
+    return url_request_response.headers['Content-Length'] != '' # file exists
 
 
 def get_auth_header():
     # get username and password for authentication
-    USERNAME = getpass.getpass("Enter Aberystwyth Username: ")
+    username = getpass.getpass("Enter Aberystwyth Username: ")
 
     try:
-        PASSWORD = getpass.getpass("Enter Aberystwyth Password: ")
+        password = getpass.getpass("Enter Aberystwyth Password: ")
     except Exception as error:
         print('ERROR', error)
 
-    return requests.auth.HTTPBasicAuth(USERNAME, PASSWORD)
+    return requests.auth.HTTPBasicAuth(username, password)
 
 
 def get_module_details():
@@ -42,19 +43,19 @@ def get_paper(pdf_url, auth_header):
         try:
             # send a HTTP request to the server and save
             # the HTTP response in a response object called r
-            r = requests.get(pdf_url, auth=auth_header)
+            url_request_response = requests.get(pdf_url, auth=auth_header)
             # raise exception if response not successful
-            r.raise_for_status()
+            url_request_response.raise_for_status()
         except requests.exceptions.HTTPError as http_err:
             print('HTTP Error Occurred:', http_err)
         else:
             # get semester ID and PDF name and combine the two
             local_pdf_path = '-'.join(pdf_url.split('/')[-2:])
 
-            with open(local_pdf_path, 'wb') as f:
+            with open(local_pdf_path, 'wb') as local_file:
                 # Saving received content as a PDF file in binary format
                 # write the contents of the response (r.content) to a new file in binary mode.
-                f.write(r.content)
+                local_file.write(url_request_response.content)
             print('Retrieved PDF from URL:', pdf_url)
     else:
         print('Failed to find PDF at URL:', pdf_url)
@@ -100,10 +101,10 @@ if __name__ == '__main__':
         DEPARTMENT_URL, MODULE_CODE = get_module_details()
 
         # get current working directory (CWD) according to OS
-        cwd = os.getcwd()
+        CWD = os.getcwd()
 
         # move in to the current working directory
-        os.chdir(cwd)
+        os.chdir(CWD)
 
         # check if the folder where we are going to write exists
         try:
@@ -126,9 +127,9 @@ if __name__ == '__main__':
         print("\nAll Semesters Checked. Check folder for any downloaded papers.")
 
         print() # print blank line
-        exit_value = input("Press Enter to EXIT the program, any other input \
+        EXIT_VALUE = input("Press Enter to EXIT the program, any other input \
                            will allow you to enter another module!\n")
-        if exit_value == '':
+        if EXIT_VALUE == '':
             break
         else:
             os.chdir('..') # move up one directory
