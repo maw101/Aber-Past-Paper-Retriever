@@ -112,8 +112,8 @@ if __name__ == '__main__':
         # check if the folder where we are going to write exists
         try:
             os.mkdir(MODULE_CODE)
-        except:
-            pass
+        except OSError as error:
+            print(error)
 
         # move in to the module directory
         os.chdir(MODULE_CODE)
