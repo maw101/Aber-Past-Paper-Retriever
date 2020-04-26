@@ -1,11 +1,9 @@
-import datetime, os, requests, getpass
+import os, requests, getpass
 import lxml.html
 
 # define constants
-DEFAULT_YEAR_FROM = 2015
 WEBSITE_BASE_URL = 'https://www.aber.ac.uk'
     
-
 def file_exists(url, auth_header):
     r = requests.head(url, auth=auth_header) # get header of file at url
     return r.headers['Content-Length'] != '' # file exists
@@ -80,13 +78,11 @@ def get_paper_links_for_semester(semester_url):
     
     return paper_links
 
-
 def find_module_paper_url(paper_urls, module_code):
     for url in paper_urls:
         if module_code in url:
             return url
     return None
-
 
 def get_module_paper_for_semester(paper_urls, module_code, auth_header):
     paper_url = find_module_paper_url(paper_urls, module_code)
