@@ -14,12 +14,15 @@ def is_existing_file(url, auth_header):
 
 def get_auth_header():
     # get username and password for authentication
-    username = getpass.getpass("Enter Aberystwyth Username: ")
+    try:
+        username = getpass.getpass("Enter Aberystwyth Username: ")
+    except getpass.GetPassWarning as warning:
+        print('Warning:', warning)
 
     try:
         password = getpass.getpass("Enter Aberystwyth Password: ")
-    except Exception as error:
-        print('ERROR', error)
+    except getpass.GetPassWarning as warning:
+        print('Warning:', warning)
 
     return requests.auth.HTTPBasicAuth(username, password)
 
