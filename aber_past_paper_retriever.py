@@ -1,6 +1,6 @@
 import os
-import requests
 import getpass
+import requests
 import lxml.html
 
 # define constants
