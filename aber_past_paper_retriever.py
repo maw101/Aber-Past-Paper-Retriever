@@ -50,27 +50,27 @@ def get_module_details():
     return (department_url, module_code)
 
 
-def get_paper(year, semester, module_code, department, auth_header):
-    url = format_pdf_url(year, semester, module_code, department)
-    if file_exists(url, auth_header):
+def get_paper(pdf_url, auth_header):
+    if file_exists(pdf_url, auth_header):
         try:
             # send a HTTP request to the server and save
             # the HTTP response in a response object called r
-            r = requests.get(url, auth=auth_header)
+            r = requests.get(pdf_url, auth=auth_header)
             # raise exception if response not successful
             r.raise_for_status()
         except requests.exceptions.HTTPError as http_err:
-            print("HTTP Error Occurred:", http_err)
+            print('HTTP Error Occurred:', http_err)
         else:
-            local_pdf_path = format_local_pdf_path(year, semester, module_code)
+            # get semester ID and PDF name and combine the two
+            local_pdf_path = '-'.join(pdf_url.split('/')[-2:])
 
             with open(local_pdf_path, 'wb') as f:
                 # Saving received content as a PDF file in binary format 
                 # write the contents of the response (r.content) to a new file in binary mode. 
                 f.write(r.content)
-            print_formatted_retrieval_result(year, semester, module_code, "Retrieved")
+            print('Retrieved PDF from URL:', pdf_url)
     else:
-        print_formatted_retrieval_result(year, semester, module_code, "Not Found")
+        print('Failed to find PDF at URL:', pdf_url)
 
 
 def get_semester_page_links(department_url):
