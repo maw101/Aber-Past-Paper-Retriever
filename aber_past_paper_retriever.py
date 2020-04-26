@@ -73,6 +73,16 @@ def get_paper(year, semester, module_code, department, auth_header):
         print_formatted_retrieval_result(year, semester, module_code, "Not Found")
 
 
+def get_semester_page_links(department_url):
+    department_page_response = requests.get(department_url, stream=True)
+    department_page_response.raw.decode_content = True
+    page_tree = lxml.html.parse(department_page_response.raw)
+    
+    semester_links = page_tree.xpath('/html/body/div[2]/main/div/article/div//a/@href')
+    semester_links = [WEBSITE_BASE_URL + sem_url for sem_url in semester_links]
+    
+    return semester_links
+
 if __name__ == '__main__':
     AUTH_HEADER = get_auth_header()
     while True:
