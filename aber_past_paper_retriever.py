@@ -40,11 +40,11 @@ def get_auth_header():
 
 def get_module_details():
     department = input("Enter your Department URL from the past papers URL (see README file, leave blank for compsci): ")
-    if department is '':
+    if department == '':
         department = "compsci"
         
     module_code = input("Enter Module Code: ")
-    if module_code is '':
+    if module_code == '':
         raise RuntimeError("No Module Code Given")
         
     try:
@@ -111,6 +111,6 @@ if __name__ == '__main__':
 
         print() # print blank line
         exit_value = input("Press Enter to EXIT the program, any other input will allow you to enter another module!\n")
-        if exit_value is '':
+        if exit_value == '':
             break
     
