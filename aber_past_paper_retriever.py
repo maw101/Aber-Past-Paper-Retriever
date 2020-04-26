@@ -131,5 +131,5 @@ if __name__ == '__main__':
                            will allow you to enter another module!\n")
         if EXIT_VALUE == '':
             break
-        else:
-            os.chdir('..') # move up one directory
+        
+        os.chdir('..') # move up one directory
