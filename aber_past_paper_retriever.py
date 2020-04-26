@@ -1,4 +1,5 @@
 import datetime, os, requests, getpass
+import lxml.html
 
 # define constants
 DEFAULT_YEAR_FROM = 2015
