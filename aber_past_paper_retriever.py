@@ -6,7 +6,7 @@ import lxml.html
 # define constants
 WEBSITE_BASE_URL = 'https://www.aber.ac.uk'
 
-def file_exists(url, auth_header):
+def is_existing_file(url, auth_header):
     # get header of file at url
     url_request_response = requests.head(url, auth=auth_header)
     return url_request_response.headers['Content-Length'] != '' # file exists
@@ -39,7 +39,7 @@ def get_module_details():
 
 
 def get_paper(pdf_url, auth_header):
-    if file_exists(pdf_url, auth_header):
+    if is_existing_file(pdf_url, auth_header):
         try:
             # send a HTTP request to the server and save
             # the HTTP response in a response object called r
