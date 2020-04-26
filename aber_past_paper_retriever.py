@@ -38,26 +38,16 @@ def get_auth_header():
 
 
 def get_module_details():
-    department = input("Enter your Department URL from the past papers URL (see README file, leave blank for compsci): ")
-    if department == '':
-        department = "compsci"
+    department_url = input("Enter your Department URL from the past papers URL (see README file, leave blank for compsci): ")
+    if department_url == '':
+        department_url = 'https://www.aber.ac.uk/en/past-papers/compsci/'
         
     module_code = input("Enter Module Code: ")
     if module_code == '':
         raise RuntimeError("No Module Code Given")
-        
-    try:
-        year_from = int(input("Enter Starting Year to Retrieve for: "))
-    except ValueError:
-        year_from = DEFAULT_YEAR_FROM
-    
-    try:
-        year_to = int(input("Enter End Year to Retrieve for: "))
-    except ValueError:
-        year_to = datetime.datetime.now().year
     
     print() # print blank line
-    return (department, module_code, year_from, year_to)
+    return (department_url, module_code)
 
 
 def get_paper(year, semester, module_code, department, auth_header):
@@ -86,7 +76,7 @@ def get_paper(year, semester, module_code, department, auth_header):
 if __name__ == '__main__':
     AUTH_HEADER = get_auth_header()
     while True:
-        DEPARTMENT_URL_FOLDER, MODULE_CODE, YEAR_FROM, YEAR_TO = get_module_details()
+        DEPARTMENT_URL, MODULE_CODE = get_module_details()
 
         # get current working directory (CWD) according to OS
         cwd = os.getcwd()
@@ -102,9 +92,8 @@ if __name__ == '__main__':
         
         # get papers in our range range
         print("Retrieving Papers for", MODULE_CODE)
-        for year in range(YEAR_FROM, YEAR_TO + 1):
-            for semester in [1, 2]:
-                get_paper(year, semester, MODULE_CODE, DEPARTMENT_URL_FOLDER, AUTH_HEADER)
+        
+        # TODO
 
         print("\nAll Papers in Range Retrieved")
 
