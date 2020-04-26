@@ -1,3 +1,22 @@
+"""Aberystwyth University Automatic Past Paper Retriever.
+
+This module provides an automated solution to retrieving past papers from the
+Abersywtyth University Past Paper's Page for a given Module Code.
+
+If the user is authorised for access to past paper's with their provided
+credentials, papers from all available years for a given module are downloaded
+in to their own directory.
+
+Requirements:
+	getpass
+    requests
+    lxml.html
+
+Example:
+	$ python3 aber_past_paper_retriever.py
+
+"""
+
 import os
 import getpass
 import requests
@@ -7,13 +26,27 @@ import lxml.html
 WEBSITE_BASE_URL = 'https://www.aber.ac.uk'
 
 def is_existing_file(url, auth_header):
+    """Checks if a file exists at the given URL.
+
+	Args:
+		url (str): the url to retrieve the file from
+		auth_header (HTTPBasicAuth): a authorization header for the request
+	Returns:
+		bool: True if a file exists at the given URL, False otherwise.
+
+	"""
     # get header of file at url
     url_request_response = requests.head(url, auth=auth_header)
     return url_request_response.headers['Content-Length'] != '' # file exists
 
 
 def get_auth_header():
-    # get username and password for authentication
+    """Gets username and password for authorization header.
+
+	Returns:
+		auth_header (HTTPBasicAuth): a authorisation header with the users details
+
+	"""
     try:
         username = getpass.getpass("Enter Aberystwyth Username: ")
     except getpass.GetPassWarning as warning:
@@ -28,6 +61,12 @@ def get_auth_header():
 
 
 def get_module_details():
+    """Gets department URL and module code from the user.
+
+	Returns:
+		tuple (str, str): department url and module code in a tuple
+
+	"""
     department_url = input("Enter your Department URL from the past papers \
                            URL (see README file, leave blank for compsci): ")
     if department_url == '':
@@ -42,6 +81,13 @@ def get_module_details():
 
 
 def get_paper(pdf_url, auth_header):
+    """Gets a local copy of the paper from the given URL.
+
+	Args:
+		pdf_url (str): the url to retrieve the file from
+		auth_header (HTTPBasicAuth): a authorization header for the request
+
+	"""
     if is_existing_file(pdf_url, auth_header):
         try:
             # send a HTTP request to the server and save
@@ -65,6 +111,14 @@ def get_paper(pdf_url, auth_header):
 
 
 def get_semester_page_links(department_url):
+    """Gets all semester page links from a department's exam paper page.
+
+	Args:
+		department_url (str): the url for the department's exam paper page
+	Returns:
+		list (str): a list of URLs leading to all semester exam pages
+
+	"""
     department_page_response = requests.get(department_url, stream=True)
     department_page_response.raw.decode_content = True
     page_tree = lxml.html.parse(department_page_response.raw)
@@ -76,6 +130,14 @@ def get_semester_page_links(department_url):
 
 
 def get_paper_links_for_semester(semester_url):
+    """Gets all exam paper file links from a semester's exam paper page.
+
+	Args:
+		semester_url (str): the url for the semester's exam paper page
+	Returns:
+		list (str): a list of URLs leading to all exam paper files
+
+	"""
     semester_page_response = requests.get(semester_url, stream=True)
     semester_page_response.raw.decode_content = True
     page_tree = lxml.html.parse(semester_page_response.raw)
@@ -86,12 +148,29 @@ def get_paper_links_for_semester(semester_url):
     return paper_links
 
 def find_module_paper_url(paper_urls, module_code):
+    """Searches for a module code within a list of past paper file URLs.
+
+	Args:
+        paper_urls (list str): a list of URLs leading to all exam paper files
+		module_code (str): the code for the module searching for
+	Returns:
+		str containing the module papers URL if module code found, None otherwise
+
+	"""
     for url in paper_urls:
         if module_code in url:
             return url
     return None
 
 def get_module_paper_for_semester(paper_urls, module_code, auth_header):
+    """Gets exam paper file (if exists) from a list of exam paper file links.
+
+	Args:
+        paper_urls (list str): a list of URLs leading to all exam paper files
+        module_code (str): the code for the module searching for
+		auth_header (HTTPBasicAuth): a authorization header for the request
+
+	"""
     paper_url = find_module_paper_url(paper_urls, module_code)
     if paper_url is not None:
         get_paper(paper_url, auth_header)
