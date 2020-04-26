@@ -92,13 +92,14 @@ def get_module_paper_for_semester(paper_urls, module_code, auth_header):
 
 if __name__ == '__main__':
     AUTH_HEADER = get_auth_header()
+    
     while True:
         DEPARTMENT_URL, MODULE_CODE = get_module_details()
 
         # get current working directory (CWD) according to OS
         cwd = os.getcwd()
 
-        # move in to the new directory
+        # move in to the current working directory
         os.chdir(cwd)
 
         # check if the folder where we are going to write exists
@@ -107,15 +108,20 @@ if __name__ == '__main__':
         except:
             pass
         
-        # get papers in our range range
+        # move in to the module directory
+        os.chdir(MODULE_CODE)
+        
+        # get papers in our range
         print("Retrieving Papers for", MODULE_CODE)
         
-        # TODO
+        # TODO HERE
 
-        print("\nAll Papers in Range Retrieved")
+        print("\nAll Semesters Checked. Check folder for any downloaded papers.")
 
         print() # print blank line
         exit_value = input("Press Enter to EXIT the program, any other input will allow you to enter another module!\n")
         if exit_value == '':
             break
+        else:
+            os.chdir('..') # move up one directory
     
