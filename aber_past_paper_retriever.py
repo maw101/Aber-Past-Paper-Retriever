@@ -88,6 +88,12 @@ def find_module_paper_url(paper_urls, module_code):
     return None
 
 
+def get_module_paper_for_semester(paper_urls, module_code, auth_header):
+    paper_url = find_module_paper_url(paper_urls, module_code)
+    if paper_url is not None:
+        get_paper(paper_url, auth_header)
+        
+
 if __name__ == '__main__':
     AUTH_HEADER = get_auth_header()
     while True:
