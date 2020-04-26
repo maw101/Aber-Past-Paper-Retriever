@@ -3,9 +3,7 @@ import lxml.html
 
 # define constants
 DEFAULT_YEAR_FROM = 2015
-
-
-
+WEBSITE_BASE_URL = 'https://www.aber.ac.uk'
 
 def format_pdf_url(year, semester, module_code, department):
     year_two_digit_format = year % 100
