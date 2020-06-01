@@ -27,7 +27,9 @@ python3 aber_past_paper_retriever.py
 
 Papers will then be retrieved and stored within a new folder in the location where the script is being run from.
 
-#### Example Output
+#### Example 1
+This example is for a Computer Science Module with Module Code CS26520.
+
 ```text
 Enter Aberystwyth Username: 
 Enter Aberystwyth Password: 
@@ -38,6 +40,25 @@ Retrieving Papers for CS26520
 Retrieved PDF from URL: https://www.aber.ac.uk/en/media/departmental/examinations/pastpapers/pdf/compsci/sem2-19/CS26520-Artificial-Intelligence.pdf
 Retrieved PDF from URL: https://www.aber.ac.uk/en/media/departmental/examinations/pastpapers/pdf/compsci/sem2-18/CS26520-18.pdf
 Retrieved PDF from URL: https://www.aber.ac.uk/en/media/departmental/examinations/pastpapers/pdf/compsci/sem2-17/CS26520-17.pdf
+
+All Semesters Checked. Check folder for any downloaded papers.
+
+Press Enter to EXIT the program, any other input will allow you to enter another module!
+```
+
+#### Example 2
+This example is for an International Politics Module with Module Code IQ30320.
+
+```text
+Enter Aberystwyth Username: 
+Enter Aberystwyth Password: 
+Enter your Department URL from the past papers URL (see README file, leave blank for compsci): https://www.aber.ac.uk/en/past-papers/interpol/
+Enter Module Code: IQ30320
+
+Retrieving Papers for IQ30320
+Retrieved PDF from URL: https://www.aber.ac.uk/en/media/departmental/examinations/pastpapers/pdf/interpol/sem1-19/IQ30320-19.pdf
+Retrieved PDF from URL: https://www.aber.ac.uk/en/media/departmental/examinations/pastpapers/pdf/interpol/sem1-18/IQ30320-18.pdf
+Retrieved PDF from URL: https://www.aber.ac.uk/en/media/departmental/examinations/pastpapers/pdf/interpol/sem2-16/IQ30320-16.pdf
 
 All Semesters Checked. Check folder for any downloaded papers.
 
