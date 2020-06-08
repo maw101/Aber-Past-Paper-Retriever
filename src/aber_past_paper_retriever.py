@@ -76,4 +76,16 @@ class PaperRetriever:
         """
         self.graduate_level = graduate_level
 
-    
+    def move_into_module_folder(self):
+        """Moves into the module folder."""
+        # move in to the destination directory
+        os.chdir(self.destination_folder)
+
+        # check if the folder where we are going to write exists
+        try:
+            os.mkdir(self.module_code)
+        except OSError:
+            pass
+
+        # move in to the module directory
+        os.chdir(self.module_code)
