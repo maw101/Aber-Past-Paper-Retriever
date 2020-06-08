@@ -1,3 +1,21 @@
+"""Aberystwyth University Automatic Past Paper Retriever.
+
+This module provides an automated solution to retrieving past papers from the
+Abersywtyth University Past Paper's Page for a given Module Code.
+
+If the user is authorised for access to past paper's with their provided
+credentials, papers from all available years for a given module are downloaded
+in to their own directory.
+
+Requirements:
+    requests
+    lxml.html
+
+Usage:
+    Use the CLI or GUI interface, both of which utilise this class.
+
+"""
+
 import os
 import requests
 import lxml.html
@@ -163,3 +181,18 @@ class PaperRetriever:
             if self.module_code in url:
                 return url
         return None
+
+    def get_module_paper_for_semester(self, paper_urls):
+        """Gets exam paper file (if exists) from a list of exam paper file links.
+    
+        Args:
+            paper_urls (list str): a list of URLs leading to all exam paper files
+            module_code (str): the code for the module searching for
+            auth_header (HTTPBasicAuth): a authorization header for the request
+    
+        """
+        paper_url = self.find_module_paper_url(paper_urls)
+        if paper_url is not None:
+            self.get_paper(paper_url)
+
+    
