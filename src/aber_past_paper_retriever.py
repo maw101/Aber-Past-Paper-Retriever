@@ -1,6 +1,7 @@
 import os
 import requests
 import lxml.html
+import re
 
 WEBSITE_BASE_URL = 'https://www.aber.ac.uk'
 DEPARTMENT_LISTING_URL = WEBSITE_BASE_URL + '/en/past-papers/'
@@ -57,3 +58,22 @@ class PaperRetriever:
             raise ValueError('Invalid Module Code Provided')
         self.module_code = module_code
 
+    def set_destination_folder(self, destination_folder):
+        """Sets the destination folder path attribute.
+
+        Attributes:
+            destination_folder (str): the new value for the destination path
+
+        """
+        self.destination_folder = destination_folder
+
+    def set_graduate_level(self, graduate_level):
+        """Sets the user graduate level attribute.
+
+        Attributes:
+            graduate_level (str): the new value for the graduate level attribute
+
+        """
+        self.graduate_level = graduate_level
+
+    
