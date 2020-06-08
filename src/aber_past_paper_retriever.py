@@ -17,4 +17,14 @@ class PaperRetriever:
 
     """
     
-    
+    def set_auth_header(self, username, password):
+        """Sets the authentication header attribute.
+
+        Attributes:
+            username (str): the username
+            password (str): the password
+
+        """
+        # encode HTTPBasicAuth header
+        self.auth_header = requests.auth.HTTPBasicAuth(username, password)
+
