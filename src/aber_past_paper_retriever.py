@@ -123,3 +123,17 @@ class PaperRetriever:
         semester_links = [WEBSITE_BASE_URL + sem_url for sem_url in semester_links]
     
         return semester_links
+
+    def find_module_paper_url(self, paper_urls):
+        """Searches for a module code within a list of past paper file URLs.
+    
+        Args:
+            paper_urls (list str): a list of URLs leading to all exam paper files
+        Returns:
+            str containing the module papers URL if module code found, None otherwise
+    
+        """
+        for url in paper_urls:
+            if self.module_code in url:
+                return url
+        return None
