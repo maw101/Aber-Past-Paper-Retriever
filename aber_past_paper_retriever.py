@@ -175,6 +175,10 @@ def get_module_paper_for_semester(paper_urls, module_code, auth_header):
     if paper_url is not None:
         get_paper(paper_url, auth_header)
 
+def get_all_module_papers(semester_page_links, module_code, auth_header):
+    for semester in semester_page_links:
+            current_semester_paper_links = get_paper_links_for_semester(semester)
+            get_module_paper_for_semester(current_semester_paper_links, module_code, auth_header)
 
 if __name__ == '__main__':
     AUTH_HEADER = get_auth_header()
@@ -202,9 +206,7 @@ if __name__ == '__main__':
 
         SEMESTER_PAGE_LINKS = get_semester_page_links(DEPARTMENT_URL)
 
-        for semester in SEMESTER_PAGE_LINKS:
-            CURRENT_SEMESTER_PAPER_LINKS = get_paper_links_for_semester(semester)
-            get_module_paper_for_semester(CURRENT_SEMESTER_PAPER_LINKS, MODULE_CODE, AUTH_HEADER)
+        get_all_module_papers(SEMESTER_PAGE_LINKS, MODULE_CODE, AUTH_HEADER)
 
         print("\nAll Semesters Checked. Check folder for any downloaded papers.")
 
