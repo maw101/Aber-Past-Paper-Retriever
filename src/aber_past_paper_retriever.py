@@ -89,3 +89,8 @@ class PaperRetriever:
 
         # move in to the module directory
         os.chdir(self.module_code)
+
+    def move_out_of_module_folder(self):
+        """Moves out of the module folder."""
+        # move in to the destination directory
+        os.chdir('..')
