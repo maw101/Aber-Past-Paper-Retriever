@@ -226,3 +226,10 @@ class PaperRetriever:
     
         return paper_links
 
+    def retrieve(self):
+        """Retrieves all module exam papers for all years."""
+        print('Retrieving from', self.department_url, 'for module', self.module_code)
+        
+        semester_page_links = self.get_semester_page_links()
+        self.get_all_module_papers(semester_page_links)
+        return 'Retrieved any module papers found - check the destination folder.'
