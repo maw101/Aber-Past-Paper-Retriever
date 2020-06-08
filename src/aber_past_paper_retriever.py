@@ -95,6 +95,19 @@ class PaperRetriever:
         # move in to the destination directory
         os.chdir('..')
 
+    def is_existing_file(self, file_url):
+        """Checks if a file exists at the given URL.
+    
+        Args:
+            file_url (str): the url to retrieve the file from
+        Returns:
+            bool: True if a file exists at the given URL, False otherwise.
+    
+        """
+        # get header of file at url
+        url_request_response = requests.head(file_url, auth=self.auth_header)
+        return url_request_response.headers['Content-Length'] != '' # file exists
+
     def get_paper(self, pdf_url):
         """Gets a local copy of the paper from the given URL.
     
@@ -120,19 +133,6 @@ class PaperRetriever:
             print('Local PDF path', local_pdf_path)
         else:
             raise ValueError('Failed to find PDF at URL: ' + pdf_url)
-
-    def is_existing_file(self, file_url):
-        """Checks if a file exists at the given URL.
-    
-        Args:
-            file_url (str): the url to retrieve the file from
-        Returns:
-            bool: True if a file exists at the given URL, False otherwise.
-    
-        """
-        # get header of file at url
-        url_request_response = requests.head(file_url, auth=self.auth_header)
-        return url_request_response.headers['Content-Length'] != '' # file exists
 
     def get_semester_page_links(self):
         """Gets all semester page links from a department's exam paper page.
