@@ -195,4 +195,16 @@ class PaperRetriever:
         if paper_url is not None:
             self.get_paper(paper_url)
 
+    def get_all_module_papers(self, semester_page_links):
+        """Gets all exam papers for a given module for all semesters.
     
+        Args:
+            semester_page_links (list str): a list of URLs leading to semesters
+        Returns:
+            list str: links to all exam papers found for the module
+    
+        """
+        for semester in semester_page_links:
+                current_semester_paper_links = self.get_paper_links_for_semester(semester)
+                self.get_module_paper_for_semester(current_semester_paper_links)
+
