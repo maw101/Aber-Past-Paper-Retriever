@@ -55,3 +55,36 @@ def get_module_details():
 
     print() # print blank line
     return (department_url, module_code)
+
+
+if __name__ == '__main__':
+    retriever = aber_past_paper_retriever.PaperRetriever()
+    
+    username, password = get_credentials()
+    retriever.set_auth_header(username, password)
+
+    while True:
+        DEPARTMENT_URL, MODULE_CODE = get_module_details()
+        retriever.set_department_url(DEPARTMENT_URL)
+        retriever.set_module_code(MODULE_CODE) # TODO: NEED TRY CATCH FOR ValueError
+
+        # get current working directory (CWD) according to OS
+        CWD = os.getcwd()
+
+        retriever.set_destination_folder(CWD)
+        retriever.move_into_module_folder()
+
+        # get papers in our range
+        print("Retrieving Papers for", MODULE_CODE)
+
+        retriever.retrieve()
+
+        print("\nAll Semesters Checked. Check folder for any downloaded papers.")
+
+        print() # print blank line
+        EXIT_VALUE = input("Press Enter to EXIT the program, any other input" +
+                           " will allow you to enter another module!\n")
+        if EXIT_VALUE == '':
+            break
+
+        retriever.move_out_of_module_folder()
