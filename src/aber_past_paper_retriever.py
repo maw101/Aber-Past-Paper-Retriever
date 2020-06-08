@@ -208,3 +208,21 @@ class PaperRetriever:
                 current_semester_paper_links = self.get_paper_links_for_semester(semester)
                 self.get_module_paper_for_semester(current_semester_paper_links)
 
+    def get_paper_links_for_semester(self, semester_url):
+        """Gets all exam paper file links from a semester's exam paper page.
+    
+        Args:
+            semester_url (str): the url for the semester's exam paper page
+        Returns:
+            list (str): a list of URLs leading to all exam paper files
+    
+        """
+        semester_page_response = requests.get(semester_url, stream=True)
+        semester_page_response.raw.decode_content = True
+        page_tree = lxml.html.parse(semester_page_response.raw)
+    
+        paper_links = page_tree.xpath('/html/body/div[2]/main/div/article/div//a/@href')
+        paper_links = [WEBSITE_BASE_URL + paper_url for paper_url in paper_links]
+    
+        return paper_links
+
