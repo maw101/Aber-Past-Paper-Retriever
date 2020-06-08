@@ -44,4 +44,16 @@ class PaperRetriever:
             else:
                 self.department_url = self.department_url + 'postg/'
 
-    
+    def set_module_code(self, module_code):
+        """Sets the module code attribute.
+
+        Attributes:
+            module_code (str): the new value for the module code attribute
+
+        """
+        # validate
+        validation_result = re.match('^[A-Z]{2,3}[0-9]{4,5}$', module_code)
+        if validation_result is None:
+            raise ValueError('Invalid Module Code Provided')
+        self.module_code = module_code
+
