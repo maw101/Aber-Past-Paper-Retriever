@@ -95,6 +95,32 @@ class PaperRetriever:
         # move in to the destination directory
         os.chdir('..')
 
+    def get_paper(self, pdf_url):
+        """Gets a local copy of the paper from the given URL.
+    
+        Args:
+            pdf_url (str): the url to retrieve the file from
+    
+        """
+        if self.is_existing_file(pdf_url):
+            # send a HTTP request to the server and save
+            # the HTTP response in a response object called r
+            url_request_response = requests.get(pdf_url, auth=self.auth_header)
+            # raise exception if response not successful
+            url_request_response.raise_for_status()
+
+            # get semester ID and PDF name and combine the two
+            local_pdf_path = '-'.join(pdf_url.split('/')[-2:])
+
+            with open(local_pdf_path, 'wb') as local_file:
+                # Saving received content as a PDF file in binary format
+                # write the contents of the response (r.content) to a new file in binary mode.
+                local_file.write(url_request_response.content)
+            print('Retrieved', pdf_url)
+            print('Local PDF path', local_pdf_path)
+        else:
+            raise ValueError('Failed to find PDF at URL: ' + pdf_url)
+
     def is_existing_file(self, file_url):
         """Checks if a file exists at the given URL.
     
