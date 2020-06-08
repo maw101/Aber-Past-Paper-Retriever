@@ -107,3 +107,19 @@ class PaperRetriever:
         # get header of file at url
         url_request_response = requests.head(file_url, auth=self.auth_header)
         return url_request_response.headers['Content-Length'] != '' # file exists
+
+    def get_semester_page_links(self):
+        """Gets all semester page links from a department's exam paper page.
+    
+        Returns:
+            list (str): a list of URLs leading to all semester exam pages
+    
+        """
+        department_page_response = requests.get(self.department_url, stream=True)
+        department_page_response.raw.decode_content = True
+        page_tree = lxml.html.parse(department_page_response.raw)
+    
+        semester_links = page_tree.xpath('/html/body/div[2]/main/div/article/div//a/@href')
+        semester_links = [WEBSITE_BASE_URL + sem_url for sem_url in semester_links]
+    
+        return semester_links
