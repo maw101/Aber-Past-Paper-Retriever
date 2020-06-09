@@ -1,3 +1,18 @@
+"""Aberystwyth University Automatic Past Paper Retriever GUI Interface.
+
+This module provides a GUI interface for retrieving past papers from the
+Abersywtyth University Past Paper's Page for a given Module Code.
+
+Requirements:
+    getpass
+    requests
+    lxml.html
+
+Example:
+    $ python3 aber_past_paper_retriever_gui.py
+
+"""
+
 import aber_past_paper_retriever
 import tkinter
 from tkinter import ttk, filedialog, messagebox
