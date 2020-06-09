@@ -78,3 +78,12 @@ class App(object):
         # enable module field
         self.module_field['state'] = 'normal'
         
+    def validateModuleField(self):
+        module_field_content = self.module_field.get()
+      
+        try:
+            self.retriever.set_module_code(module_field_content)
+        except ValueError:
+            messagebox.showerror('Error', 'Invalid Module Code Provided - does not match "two letters five numbers" OR "three letters four numbers" format')
+            # disable submit button
+            self.submit_form_button['state'] = 'disabled'
