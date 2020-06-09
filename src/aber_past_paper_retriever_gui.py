@@ -97,3 +97,18 @@ class App(object):
             self.retriever.set_destination_folder(self.destination_directory_path)
             # enable submit button
             self.submit_form_button['state'] = 'normal'
+
+    def submitFormCallback(self):
+        # TODO: this
+        
+        self.validateModuleField()
+        
+        # set credentials
+        self.retriever.set_auth_header(self.username_field.get(), self.password_field.get())
+        
+        self.retriever.move_into_module_folder()
+        
+        retrieved_message = self.retriever.retrieve()
+        messagebox.showinfo('Information', retrieved_message)
+        
+        self.retriever.move_out_of_module_folder()
