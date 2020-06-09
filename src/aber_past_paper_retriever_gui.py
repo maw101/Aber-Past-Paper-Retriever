@@ -87,3 +87,13 @@ class App(object):
             messagebox.showerror('Error', 'Invalid Module Code Provided - does not match "two letters five numbers" OR "three letters four numbers" format')
             # disable submit button
             self.submit_form_button['state'] = 'disabled'
+
+    def selectFolderCallback(self):
+        self.destination_directory_path = filedialog.askdirectory()
+
+        # check directory selected
+        if (not self.destination_directory_path is None) and (not self.module_field.get() is None):
+            # set output destination
+            self.retriever.set_destination_folder(self.destination_directory_path)
+            # enable submit button
+            self.submit_form_button['state'] = 'normal'
