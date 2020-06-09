@@ -58,3 +58,14 @@ class App(object):
         # submit form button
         self.submit_form_button = ttk.Button(frm, text='Request Papers', state='disabled', command=self.submitFormCallback)
         self.submit_form_button.grid(row=10, column=1, columnspan=2, padx=10, pady=8)
+
+
+    def get_department_values(self, eventObject):
+        self.department_dict = self.retriever.get_departments()
+        new_values = list(self.department_dict.keys())
+        self.update_department_values_combo(new_values)
+
+    def update_department_values_combo(self, new_values):
+        self.department_combo['values'] = new_values
+        self.department_combo['state'] = 'readonly'
+
