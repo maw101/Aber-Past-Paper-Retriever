@@ -69,3 +69,12 @@ class App(object):
         self.department_combo['values'] = new_values
         self.department_combo['state'] = 'readonly'
 
+    def departmentCallback(self, eventObject):
+        graduate_level = self.graduate_level_combo.get()
+        self.retriever.set_graduate_level(graduate_level)
+        department_name = self.department_combo.get()
+        department_url = self.department_dict.get(department_name)
+        self.retriever.set_department_url(department_url)
+        # enable module field
+        self.module_field['state'] = 'normal'
+        
