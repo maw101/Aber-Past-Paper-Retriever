@@ -112,3 +112,7 @@ class App(object):
         messagebox.showinfo('Information', retrieved_message)
         
         self.retriever.move_out_of_module_folder()
+
+
+app = App()
+app.root.mainloop()
