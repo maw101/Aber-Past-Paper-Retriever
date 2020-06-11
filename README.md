@@ -1,6 +1,10 @@
 # Aber Uni Past Paper Retriever
 Fetches all Aberystwyth University Past Paper PDFs for a given module.
 
+[CLI](src/aber_past_paper_retriever_cli.py) and [GUI](src/aber_past_paper_retriever_gui.py) interfaces provided.
+
+The underlying [paper retriever class](src/aber_past_paper_retriever.py) supports retrieval operations.
+
 Past Papers are stored at [aber.ac.uk/en/past-papers/](https://www.aber.ac.uk/en/past-papers/).
 
 ## Requirements
@@ -9,7 +13,7 @@ Past Papers are stored at [aber.ac.uk/en/past-papers/](https://www.aber.ac.uk/en
 * [lxml.html](https://lxml.de/lxmlhtml.html)
 
 ## Usage
-### aber_past_paper_retriever.py
+### aber_past_paper_retriever_cli.py
 Once the requirements are satisfied:
 
 Clone or download the project to your machine.
@@ -17,7 +21,7 @@ Clone or download the project to your machine.
 Then in a terminal window run:
 
 ```sh
-python3 aber_past_paper_retriever.py
+python3 aber_past_paper_retriever_cli.py
 ```
 
 1) Enter Aberystwyth University Username
@@ -64,6 +68,25 @@ All Semesters Checked. Check folder for any downloaded papers.
 
 Press Enter to EXIT the program, any other input will allow you to enter another module!
 ```
+
+### aber_past_paper_retriever_gui.py
+Once the requirements are satisfied:
+
+Clone or download the project to your machine.
+
+Then in a terminal window run:
+
+```sh
+python3 aber_past_paper_retriever_gui.py
+```
+
+This will run the GUI interface for the retriever.
+
+![](README_ASSETS/gui_example_1.png)
+
+Provide options for each field in turn starting with the first.
+
+Any errors encountered will be shown to the user.
 
 ## Errors
 * If you encounter a 401 Unauthorized Error your Aber Credentials (username/password) are either incorrect or you do not have the necessary permissions to view the document.
